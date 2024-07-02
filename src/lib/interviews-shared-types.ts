@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const interviewExperienceSchema = z.object({
-  companyId: z.number(),
+  companyId: z.string(),
   position: z.string(),
   receivedOffer: z.boolean(),
   acceptedOffer: z.boolean(),

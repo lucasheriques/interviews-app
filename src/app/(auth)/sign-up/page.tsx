@@ -20,7 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Terminal } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useServerAction } from "zsa-react";
-import { submitInterviewAction } from "./actions";
+import { signUpAction } from "./actions";
 
 const registrationSchema = z
   .object({
@@ -36,7 +36,7 @@ const registrationSchema = z
 export default function RegisterPage() {
   const { toast } = useToast();
 
-  const { execute, isPending, error } = useServerAction(submitInterviewAction, {
+  const { execute, isPending, error } = useServerAction(signUpAction, {
     onError({ err }) {
       toast({
         title: "Something went wrong",
