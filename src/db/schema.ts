@@ -1,4 +1,4 @@
-import { integer, text, sqliteTableCreator } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTableCreator, text } from "drizzle-orm/sqlite-core";
 
 export const accountTypeEnum = ["email", "google", "github"] as const;
 
@@ -8,6 +8,63 @@ export const users = sqliteTable("user", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   email: text("email").unique(),
   emailVerified: integer("email_verified", { mode: "timestamp" }),
+});
+
+/**
+ * table company
+ * id: ULID
+name: string
+about: string
+site: string @unique
+year_founded: number
+estimated_revenue: number
+headquarters: address
+ */
+
+export const company = sqliteTable("company", {
+  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  about: text("about").notNull(),
+  site: text("site").unique().notNull(),
+  yearFounded: integer("year_founded", { mode: "number" }).notNull(),
+  headquarters: text("headquarters").notNull(),
+});
+
+/**
+ * table interview_experiences
+ * id: ULID
+company_id: ULID
+user_id?: ULID
+position: string
+received_offer: boolean
+accepted_offer: boolean
+experience: ENUM (positive, negative, neutral)
+work_style: ENUM (hybrid, remote, onsite)
+interview_questions: strings
+ */
+
+export const interviewExperience = sqliteTable("interview_experience", {
+  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+  userId: integer("user_id", { mode: "number" })
+    .references(() => users.id, { onDelete: "cascade" })
+    .unique(),
+  companyId: integer("company_id", { mode: "number" })
+    .references(() => company.id, { onDelete: "cascade" })
+    .unique()
+    .notNull(),
+  position: text("position").notNull(),
+  receivedOffer: integer("received_offer", { mode: "boolean" }).notNull(),
+  acceptedOffer: integer("accepted_offer", { mode: "boolean" }).notNull(),
+  experience: text("experience", {
+    enum: ["positive", "negative", "neutral"],
+  }).notNull(),
+  workStyle: text("work_style", {
+    enum: ["hybrid", "remote", "onsite"],
+  }).notNull(),
+  interviewQuestions: text("interview_questions").notNull(),
+  interviewDifficulty: text("interview_difficulty", {
+    enum: ["easy", "medium", "hard"],
+  }).notNull(),
 });
 
 export const accounts = sqliteTable("accounts", {

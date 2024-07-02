@@ -2,9 +2,8 @@
 
 import { z } from "zod";
 
-import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { LoaderButton } from "@/components/loader-button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Form,
   FormControl,
@@ -13,14 +12,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { pageTitleStyles } from "@/styles/common";
-import { cn } from "@/lib/utils";
-import { useServerAction } from "zsa-react";
-import { signUpAction } from "./actions";
-import { LoaderButton } from "@/components/loader-button";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { cn } from "@/lib/utils";
+import { pageTitleStyles } from "@/styles/common";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Terminal } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { useServerAction } from "zsa-react";
+import { submitInterviewAction } from "./actions";
 
 const registrationSchema = z
   .object({
@@ -36,7 +36,7 @@ const registrationSchema = z
 export default function RegisterPage() {
   const { toast } = useToast();
 
-  const { execute, isPending, error } = useServerAction(signUpAction, {
+  const { execute, isPending, error } = useServerAction(submitInterviewAction, {
     onError({ err }) {
       toast({
         title: "Something went wrong",
