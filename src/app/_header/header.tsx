@@ -1,6 +1,4 @@
-import Link from "next/link";
-import { Suspense, cache } from "react";
-import { getCurrentUser } from "@/lib/session";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,12 +8,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LayoutDashboard, Lightbulb, Loader2Icon, LogOut } from "lucide-react";
-import { getUserProfileUseCase } from "@/use-cases/users";
-import { ModeToggle } from "./mode-toggle";
-import { MenuButton } from "./menu-button";
+import { getCurrentUser } from "@/lib/session";
 import { UserId } from "@/types";
+import { getUserProfileUseCase } from "@/use-cases/users";
+import { LayoutDashboard, Lightbulb, Loader2Icon, LogOut } from "lucide-react";
+import Link from "next/link";
+import { Suspense, cache } from "react";
+import { MenuButton } from "./menu-button";
+import { ModeToggle } from "./mode-toggle";
 
 const profilerLoader = cache(getUserProfileUseCase);
 
@@ -43,6 +43,15 @@ export async function Header() {
                 </Link>
               </Button>
             )}
+            <Button
+              variant={"link"}
+              asChild
+              className="flex items-center justify-center gap-2"
+            >
+              <Link href={"/interview"}>
+                <LayoutDashboard className="w-4 h-4" /> Interview
+              </Link>
+            </Button>
           </div>
         </div>
 
