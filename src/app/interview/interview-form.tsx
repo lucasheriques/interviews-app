@@ -58,7 +58,7 @@ export default function InterviewForm({ companies }: Props) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="companyId"
@@ -94,38 +94,6 @@ export default function InterviewForm({ companies }: Props) {
                 <FormLabel>Cargo</FormLabel>
                 <FormControl>
                   <Input {...field} className="w-full" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="receivedOffer"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                <FormLabel>Recebeu oferta</FormLabel>
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="acceptedOffer"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                <FormLabel>Aceitou oferta</FormLabel>
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -212,27 +180,61 @@ export default function InterviewForm({ companies }: Props) {
               </FormItem>
             )}
           />
+        </div>
+        <div className="flex items-center gap-8">
           <FormField
             control={form.control}
-            name="interviewQuestions"
+            name="receivedOffer"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Perguntas da entrevista</FormLabel>
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormLabel>Recebeu oferta</FormLabel>
                 <FormControl>
-                  <Textarea
-                    placeholder="Algoritmos e estruturas de dados, system design, fundamentos de JavaScript."
-                    className="resize-none"
-                    {...field}
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
                   />
                 </FormControl>
-                <FormDescription>
-                  Quais perguntas fizeram na entrevista?
-                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="acceptedOffer"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormLabel>Aceitou oferta</FormLabel>
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
+        <FormField
+          control={form.control}
+          name="interviewQuestions"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Perguntas da entrevista</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Algoritmos e estruturas de dados, system design, fundamentos de JavaScript."
+                  className="resize-none"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription>
+                Quais perguntas fizeram na entrevista?
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <LoaderButton type="submit" isLoading={isPending}>
           Enviar
         </LoaderButton>
