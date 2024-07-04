@@ -10,7 +10,7 @@ export const users = sqliteTable("user", {
   emailVerified: integer("email_verified", { mode: "timestamp" }),
 });
 
-export const companies = sqliteTable("company", {
+export const companies = sqliteTable("companies", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
   about: text("about").notNull(),
@@ -19,7 +19,7 @@ export const companies = sqliteTable("company", {
   headquarters: text("headquarters").notNull(),
 });
 
-export const interviews = sqliteTable("interview_experience", {
+export const interviews = sqliteTable("interviews", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   userId: integer("user_id", { mode: "number" })
     .references(() => users.id, { onDelete: "cascade" })

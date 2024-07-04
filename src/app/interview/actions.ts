@@ -4,6 +4,7 @@ import { interviewExperienceSchema } from "@/lib/interviews-shared-types";
 import { rateLimitByIp } from "@/lib/limiter";
 import { unauthenticatedAction } from "@/lib/safe-action";
 import { submitInterviewExperienceUseCase } from "@/use-cases/interviews";
+import { revalidatePath } from "next/cache";
 
 export const submitInterviewAction = unauthenticatedAction
   .createServerAction()
@@ -11,5 +12,8 @@ export const submitInterviewAction = unauthenticatedAction
   .handler(async ({ input }) => {
     await rateLimitByIp({ key: "register", limit: 3, window: 30000 });
 
-    return await submitInterviewExperienceUseCase(input);
+    const interview = await submitInterviewExperienceUseCase(input);
+
+    revalidatePath("/interviews");
+    return interview;
   });
