@@ -3,13 +3,11 @@ import { interviews } from "@/db/schema";
 import { InterviewExperience } from "@/lib/interviews-shared-types";
 
 export async function getInterviews() {
-  const interviews = await db.query.interviewExperience.findMany();
-
-  return interviews;
+  return await db.query.interviews.findMany();
 }
 
-export async function createInterview(interview: InterviewExperience) {
-  const newInterview = await db.insert(interviews).values(interview);
-
-  return newInterview;
+export async function createInterview(
+  interview: Omit<InterviewExperience, "companyId"> & { companyId: number }
+) {
+  return await db.insert(interviews).values(interview);
 }
