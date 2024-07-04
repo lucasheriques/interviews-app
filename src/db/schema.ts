@@ -10,18 +10,7 @@ export const users = sqliteTable("user", {
   emailVerified: integer("email_verified", { mode: "timestamp" }),
 });
 
-/**
- * table company
- * id: ULID
-name: string
-about: string
-site: string @unique
-year_founded: number
-estimated_revenue: number
-headquarters: address
- */
-
-export const company = sqliteTable("company", {
+export const companies = sqliteTable("company", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
   about: text("about").notNull(),
@@ -30,27 +19,13 @@ export const company = sqliteTable("company", {
   headquarters: text("headquarters").notNull(),
 });
 
-/**
- * table interview_experiences
- * id: ULID
-company_id: ULID
-user_id?: ULID
-position: string
-received_offer: boolean
-accepted_offer: boolean
-experience: ENUM (positive, negative, neutral)
-work_style: ENUM (hybrid, remote, onsite)
-interview_questions: strings
- */
-
-export const interviewExperience = sqliteTable("interview_experience", {
+export const interviews = sqliteTable("interview_experience", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   userId: integer("user_id", { mode: "number" })
     .references(() => users.id, { onDelete: "cascade" })
     .unique(),
   companyId: integer("company_id", { mode: "number" })
-    .references(() => company.id, { onDelete: "cascade" })
-    .unique()
+    .references(() => companies.id, { onDelete: "cascade" })
     .notNull(),
   position: text("position").notNull(),
   receivedOffer: integer("received_offer", { mode: "boolean" }).notNull(),

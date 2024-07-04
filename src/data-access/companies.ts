@@ -1,5 +1,5 @@
 import { db } from "@/db";
 
 export async function getCompanies() {
-  return await db.query.company.findMany();
+  return await db.query.companies.findMany();
 }

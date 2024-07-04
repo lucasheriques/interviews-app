@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { interviewExperience } from "@/db/schema";
+import { interviews } from "@/db/schema";
 import { InterviewExperience } from "@/lib/interviews-shared-types";
 
 export async function getInterviews() {
@@ -9,7 +9,7 @@ export async function getInterviews() {
 }
 
 export async function createInterview(interview: InterviewExperience) {
-  const newInterview = await db.insert(interviewExperience).values(interview);
+  const newInterview = await db.insert(interviews).values(interview);
 
   return newInterview;
 }

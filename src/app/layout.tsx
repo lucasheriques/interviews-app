@@ -1,14 +1,13 @@
 import "@/app/globals.css";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
-import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
-import { Archivo } from "next/font/google";
-import { Libre_Franklin } from "next/font/google";
-import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/toaster";
+import { Archivo, Libre_Franklin } from "next/font/google";
 import { Header } from "./_header/header";
+import { Providers } from "./providers";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -22,12 +21,13 @@ const libre_franklin = Libre_Franklin({
 });
 
 export const metadata: Metadata = {
-  title: "WDC Template",
+  title: "Interviews App",
   icons: [
     { rel: "icon", type: "image/png", sizes: "48x48", url: "/favicon.ico" },
   ],
   keywords: "yolo",
-  description: "A simple next.js template including drizzle and lucia auth",
+  description:
+    "Um lugar para compartilhar experiências ao aplicar para empresas.",
 };
 
 export default async function RootLayout({
