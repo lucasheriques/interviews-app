@@ -3,7 +3,11 @@ import { interviews } from "@/db/schema";
 import { InterviewExperience } from "@/lib/interviews-shared-types";
 
 export async function getInterviews() {
-  return await db.query.interviews.findMany();
+  return await db.query.interviews.findMany({
+    with: {
+      companies: true,
+    },
+  });
 }
 
 export async function createInterview(

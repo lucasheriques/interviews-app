@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { integer, sqliteTableCreator, text } from "drizzle-orm/sqlite-core";
 
 export const accountTypeEnum = ["email", "google", "github"] as const;
@@ -41,6 +42,13 @@ export const interviews = sqliteTable("interviews", {
     enum: ["easy", "medium", "hard"],
   }).notNull(),
 });
+
+export const interviewRelations = relations(interviews, ({ one }) => ({
+  companies: one(companies, {
+    fields: [interviews.companyId],
+    references: [companies.id],
+  }),
+}));
 
 export const accounts = sqliteTable("accounts", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
