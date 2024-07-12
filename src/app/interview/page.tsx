@@ -1,4 +1,4 @@
-import InterviewForm from "@/app/interview/interview-form";
+import InterviewCard from "@/app/interview/interview-card";
 import { getCompaniesUseCase } from "@/use-cases/companies";
 import { getInterviewsUseCase } from "@/use-cases/interviews";
 
@@ -8,8 +8,11 @@ export default async function HomePage() {
 
   return (
     <div className="p-4 px-2">
-      <pre>{JSON.stringify(interviews, null, 2)}</pre>
-      <InterviewForm companies={companies} />
+      <h1 className="text-2xl font-bold">Entrevistas</h1>
+      {interviews.map((interview) => (
+        <InterviewCard key={interview.id} interview={interview} />
+      ))}
+      {/* <InterviewForm companies={companies} /> */}
     </div>
   );
 }

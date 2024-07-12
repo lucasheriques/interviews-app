@@ -21,10 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import {
-  InterviewExperience,
-  interviewExperienceSchema,
-} from "@/lib/interviews-shared-types";
+import { Interview, interviewFormSchema } from "@/lib/interviews-shared-types";
 import { Company } from "@/use-cases/companies";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -35,8 +32,8 @@ interface Props {
 }
 
 export default function InterviewForm({ companies }: Props) {
-  const form = useForm<InterviewExperience>({
-    resolver: zodResolver(interviewExperienceSchema),
+  const form = useForm<Interview>({
+    resolver: zodResolver(interviewFormSchema),
   });
 
   const { toast } = useToast();
@@ -51,7 +48,7 @@ export default function InterviewForm({ companies }: Props) {
     },
   });
 
-  function onSubmit(values: InterviewExperience) {
+  function onSubmit(values: Interview) {
     execute(values);
   }
 

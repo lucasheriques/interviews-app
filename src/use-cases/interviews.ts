@@ -1,11 +1,7 @@
 import { createInterview, getInterviews } from "@/data-access/interviews";
-import { InterviewExperience } from "@/lib/interviews-shared-types";
+import { Interview } from "@/lib/interviews-shared-types";
 
-export async function submitInterviewExperienceUseCase(
-  exp: InterviewExperience,
-) {
-  // TODO: validate if company exists
-
+export async function submitInterviewExperienceUseCase(exp: Interview) {
   const companyId = exp.companyId;
 
   return await createInterview({

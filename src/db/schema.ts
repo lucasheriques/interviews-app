@@ -15,7 +15,7 @@ export const companies = sqliteTable("companies", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
   about: text("about").notNull(),
-  site: text("site").unique().notNull(),
+  domain: text("domain").unique().notNull(),
   yearFounded: integer("year_founded", { mode: "number" }).notNull(),
   headquarters: text("headquarters").notNull(),
 });
@@ -41,10 +41,11 @@ export const interviews = sqliteTable("interviews", {
   interviewDifficulty: text("interview_difficulty", {
     enum: ["easy", "medium", "hard"],
   }).notNull(),
+  applicationMethod: text("application_method").notNull().default("website"),
 });
 
 export const interviewRelations = relations(interviews, ({ one }) => ({
-  companies: one(companies, {
+  company: one(companies, {
     fields: [interviews.companyId],
     references: [companies.id],
   }),

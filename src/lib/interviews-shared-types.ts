@@ -1,6 +1,7 @@
+import { getInterviewsUseCase } from "@/use-cases/interviews";
 import { z } from "zod";
 
-export const interviewExperienceSchema = z.object({
+export const interviewFormSchema = z.object({
   companyId: z.string(),
   position: z.string(),
   receivedOffer: z.boolean(),
@@ -11,4 +12,8 @@ export const interviewExperienceSchema = z.object({
   interviewDifficulty: z.enum(["easy", "medium", "hard"]),
 });
 
-export type InterviewExperience = z.infer<typeof interviewExperienceSchema>;
+export type Interview = z.infer<typeof interviewFormSchema>;
+
+export type InterviewWithCompany = Awaited<
+  ReturnType<typeof getInterviewsUseCase>
+>[number];
