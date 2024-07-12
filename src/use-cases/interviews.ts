@@ -2,7 +2,7 @@ import { createInterview, getInterviews } from "@/data-access/interviews";
 import { InterviewExperience } from "@/lib/interviews-shared-types";
 
 export async function submitInterviewExperienceUseCase(
-  exp: InterviewExperience
+  exp: InterviewExperience,
 ) {
   // TODO: validate if company exists
 

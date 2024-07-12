@@ -7,7 +7,7 @@ export default async function HomePage() {
   const interviews = await getInterviewsUseCase();
 
   return (
-    <div className="">
+    <div className="p-4 px-2">
       <pre>{JSON.stringify(interviews, null, 2)}</pre>
       <InterviewForm companies={companies} />
     </div>

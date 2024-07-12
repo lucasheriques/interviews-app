@@ -11,7 +11,7 @@ export async function getInterviews() {
 }
 
 export async function createInterview(
-  interview: Omit<InterviewExperience, "companyId"> & { companyId: number }
+  interview: Omit<InterviewExperience, "companyId"> & { companyId: number },
 ) {
   return await db.insert(interviews).values(interview);
 }
