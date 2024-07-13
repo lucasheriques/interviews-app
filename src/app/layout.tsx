@@ -1,6 +1,7 @@
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
 import NextTopLoader from "nextjs-toploader";
 import { ReactNode } from "react";
 
@@ -23,12 +24,9 @@ const libre_franklin = Libre_Franklin({
 
 export const metadata: Metadata = {
   title: "Interviews App",
-  icons: [
-    { rel: "icon", type: "image/png", sizes: "48x48", url: "/favicon.ico" },
-  ],
+  icons: [{ rel: "icon", type: "image/png", sizes: "48x48", url: "/favicon.ico" }],
   keywords: "yolo",
-  description:
-    "Um lugar para compartilhar experiências ao aplicar para empresas.",
+  description: "Um lugar para compartilhar experiências ao aplicar para empresas.",
 };
 
 export default async function RootLayout({
@@ -37,20 +35,17 @@ export default async function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "min-h-screen bg-background antialiased",
-          archivo.variable + " " + libre_franklin.variable,
-        )}
-      >
-        <Providers>
-          <NextTopLoader />
-          <Header />
-          <div className="container mx-auto w-full py-12">{children}</div>
-        </Providers>
-        <Toaster />
-        <TailwindIndicator />
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className={cn("min-h-screen bg-background antialiased", archivo.variable + " " + libre_franklin.variable)}>
+        <NextIntlClientProvider>
+          <Providers>
+            <NextTopLoader />
+            <Header />
+            <div className="container mx-auto w-full py-12">{children}</div>
+          </Providers>
+          <Toaster />
+          <TailwindIndicator />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
