@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
 import { ReactNode } from "react";
 
+import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Toaster } from "@/components/ui/toaster";
 import { Archivo, Libre_Franklin } from "next/font/google";
 import { Header } from "./_header/header";
@@ -49,6 +50,7 @@ export default async function RootLayout({
           <div className="container mx-auto w-full py-12">{children}</div>
         </Providers>
         <Toaster />
+        <TailwindIndicator />
       </body>
     </html>
   );

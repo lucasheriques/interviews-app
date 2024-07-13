@@ -15,6 +15,12 @@ const nextConfig = {
         port: "3000",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "img.logo.dev",
+        port: "",
+        pathname: "**",
+      },
     ],
   },
 };
